@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using TesiApi.Core.Data;
 
@@ -11,9 +12,11 @@ using TesiApi.Core.Data;
 namespace TesiAPI.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20260621100320_ApartmentFacilities")]
+    partial class ApartmentFacilities
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -61,18 +64,16 @@ namespace TesiAPI.Migrations
             modelBuilder.Entity("TesiApi.Core.Model.ApartmentFacilities", b =>
                 {
                     b.Property<int>("ApartmentID")
-                        .HasColumnType("int")
-                        .HasColumnName("apartment_id");
+                        .HasColumnType("int");
 
                     b.Property<int>("FacilityTypeID")
-                        .HasColumnType("int")
-                        .HasColumnName("facility_type_id");
+                        .HasColumnType("int");
 
                     b.HasKey("ApartmentID", "FacilityTypeID");
 
                     b.HasIndex("FacilityTypeID");
 
-                    b.ToTable("apartment_facilities");
+                    b.ToTable("ApartmentFacilities");
                 });
 
             modelBuilder.Entity("TesiApi.Core.Model.Apartments", b =>

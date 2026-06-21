@@ -30,7 +30,9 @@ public class ApartmentsController : ControllerBase
           ApartmentSize = a.ApartmentSize,
           RentPrice = a.RentPrice,
           ApartmentDetails = a.ApartmentDetails,
-          SellerName = string.Concat(a.Users!.FirstName, " ", a.Users!.LastName)
+          SellerName = string.Concat(a.Users!.FirstName, " ", a.Users!.LastName),
+          Facilities = a.ApartmentFacilities
+                      .Select(af => af.RefFacilitiyTypes!.FacilityType).ToList()
         }).ToListAsync();
 
     return Ok(results);

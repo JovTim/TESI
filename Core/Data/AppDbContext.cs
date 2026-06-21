@@ -13,4 +13,10 @@ public class AppDbContext : DbContext
   public DbSet<RefApartmentTypes> RefApartmentTypes { get; set; }
   public DbSet<Users> Users { get; set; }
   public DbSet<Accounts> Accounts { get; set; }
+  public DbSet<RefFacilitiyTypes> RefFacilitiyTypes { get; set; }
+  public DbSet<ApartmentFacilities> ApartmentFacilities { get; set; }
+  protected override void OnModelCreating(ModelBuilder modelBuilder)
+  {
+    modelBuilder.Entity<ApartmentFacilities>().HasKey(af => new { af.ApartmentID, af.FacilityTypeID });
+  }
 }

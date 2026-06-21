@@ -12,4 +12,6 @@ public class ApartmentDTO
   public string ApartmentDetails { get; set; } = string.Empty;
   public string SellerName { get; set; } = string.Empty;
 
+  public List<string?> Facilities { get; set; } = new();
+
 }

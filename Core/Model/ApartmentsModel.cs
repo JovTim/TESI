@@ -42,4 +42,7 @@ public class Apartments
   [Column("apartment_details")]
   public string ApartmentDetails { get; set; } = string.Empty;
 
+
+  public ICollection<ApartmentFacilities> ApartmentFacilities { get; set; } = new List<ApartmentFacilities>();
+
 }

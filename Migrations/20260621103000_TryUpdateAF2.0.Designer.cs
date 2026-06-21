@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using TesiApi.Core.Data;
 
@@ -11,9 +12,11 @@ using TesiApi.Core.Data;
 namespace TesiAPI.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20260621103000_TryUpdateAF2.0")]
+    partial class TryUpdateAF20
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -61,12 +64,10 @@ namespace TesiAPI.Migrations
             modelBuilder.Entity("TesiApi.Core.Model.ApartmentFacilities", b =>
                 {
                     b.Property<int>("ApartmentID")
-                        .HasColumnType("int")
-                        .HasColumnName("apartment_id");
+                        .HasColumnType("int");
 
                     b.Property<int>("FacilityTypeID")
-                        .HasColumnType("int")
-                        .HasColumnName("facility_type_id");
+                        .HasColumnType("int");
 
                     b.HasKey("ApartmentID", "FacilityTypeID");
 
