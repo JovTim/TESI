@@ -43,4 +43,6 @@ public class Users
 
   public ICollection<Apartments>? Apartments { get; set; }
 
+  public ICollection<Bookings> Bookings { get; set; } = new List<Bookings>();
+
 }

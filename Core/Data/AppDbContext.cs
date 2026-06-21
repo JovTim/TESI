@@ -19,4 +19,6 @@ public class AppDbContext : DbContext
   {
     modelBuilder.Entity<ApartmentFacilities>().HasKey(af => new { af.ApartmentID, af.FacilityTypeID });
   }
+
+  public DbSet<Bookings> Bookings { get; set; }
 }
