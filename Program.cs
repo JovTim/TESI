@@ -16,7 +16,6 @@ builder.Services.AddControllers();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
-// TESTING
 if (app.Environment.IsDevelopment())
 {
     app.MapOpenApi();
