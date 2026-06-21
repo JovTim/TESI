@@ -44,5 +44,5 @@ public class Apartments
 
 
   public ICollection<ApartmentFacilities> ApartmentFacilities { get; set; } = new List<ApartmentFacilities>();
-
+  public ICollection<Bookings> Bookings { get; set; } = new List<Bookings>();
 }
