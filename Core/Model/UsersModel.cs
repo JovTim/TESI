@@ -29,6 +29,9 @@ public class Users
   [Column("gender")]
   public int Gender { get; set; }
 
+  [Column("contact_no")]
+  public string Contacts { get; set; } = string.Empty;
+
   [Column("Address")]
   public string Address { get; set; } = string.Empty;
 
