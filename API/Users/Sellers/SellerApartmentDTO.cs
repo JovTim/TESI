@@ -1,4 +1,4 @@
-namespace TesiApi.Api.Users;
+namespace TesiApi.Api.Userss;
 
 public class SellerApartmentDTO
 {

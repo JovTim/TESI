@@ -4,7 +4,7 @@ using TesiApi.Api.Apartments;
 using TesiApi.Core.Model;
 using TesiApi.Core.Data;
 
-namespace TesiApi.Api.Users.Controllers;
+namespace TesiApi.Api.Userss.Controllers;
 
 [ApiController]
 [Route("api/[controller]")]
