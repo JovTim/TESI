@@ -1,10 +1,10 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using TesiApi.Api.Apartments;
+using TesiApi.Api.Apartmentss;
 using TesiApi.Core.Model;
 using TesiApi.Core.Data;
 
-namespace TesiApi.Api.Apartments.Controllers;
+namespace TesiApi.Api.Apartmentss.Controllers;
 
 [ApiController]
 [Route("api/[controller]")]
