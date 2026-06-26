@@ -137,4 +137,35 @@ public class SellerApartmentsController : ControllerBase
     }
 
   }
+
+
+  [HttpDelete("seller/{sellerID:int}")]
+  public async Task<IActionResult> DeleteApartment([FromBody] DeleteApartmentDTO dto, int sellerID)
+  {
+    using var transaction = await _context.Database.BeginTransactionAsync();
+    try
+    {
+      var apartment = await _context.Apartments.FirstOrDefaultAsync(a => a.ApartmentID == dto.ApartmentID);
+
+      if (apartment == null)
+      {
+        return NotFound("Not found!");
+      }
+
+      apartment.ApartmentDeleted = dto.ApartmentDeleted;
+
+      await _context.SaveChangesAsync();
+
+      await transaction.CommitAsync();
+
+      return Ok("Apartment Deleted!");
+    }
+    catch (Exception)
+    {
+      await transaction.RollbackAsync();
+      return StatusCode(500);
+    }
+
+  }
+
 }
