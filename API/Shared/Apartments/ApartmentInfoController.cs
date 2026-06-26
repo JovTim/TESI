@@ -20,6 +20,7 @@ public class ApartmentsController : ControllerBase
   public async Task<ActionResult<List<ApartmentDTO>>> GetApartments()
   {
     var results = await _context.Apartments
+        .Where(a => a.ApartmentDeleted != 1)
         .Select(a => new ApartmentDTO
         {
           ApartmentID = a.ApartmentID,

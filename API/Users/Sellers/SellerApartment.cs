@@ -20,7 +20,7 @@ public class SellerApartmentsController : ControllerBase
   public async Task<ActionResult<List<SellerApartmentDTO>>> GetSellerByID(int sellerID)
   {
     var results = await _context.Apartments
-        .Where(a => a.Users!.IsSeller == 1 && a.Users.UserID == sellerID)
+        .Where(a => a.Users!.IsSeller == 1 && a.Users.UserID == sellerID && a.ApartmentDeleted != 1)
         .Select(a => new SellerApartmentDTO
         {
           ApartmentID = a.ApartmentID,
@@ -53,7 +53,8 @@ public class SellerApartmentsController : ControllerBase
         BedroomCount = apartment.BedroomCount,
         ApartmentSize = apartment.ApartmentSize,
         RentPrice = apartment.RentPrice,
-        ApartmentDetails = apartment.ApartmentDetails
+        ApartmentDetails = apartment.ApartmentDetails,
+        ApartmentDeleted = 0
       };
 
       foreach (var facilityID in apartment.ApartmentFacilities)
