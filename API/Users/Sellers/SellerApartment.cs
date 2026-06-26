@@ -78,4 +78,62 @@ public class SellerApartmentsController : ControllerBase
       return StatusCode(500);
     }
   }
+
+  // this is just for testing
+  [HttpPut("seller/{sellerID:int}")]
+  public async Task<IActionResult> EditApartment([FromBody] UpdateApartmentDTO dto, int sellerID)
+  {
+    using var transaction = await _context.Database.BeginTransactionAsync();
+    try
+    {
+      var apartment = await _context.Apartments
+                    .Include(a => a.ApartmentFacilities)
+                    .FirstOrDefaultAsync(a => a.ApartmentID == dto.ApartmentID);
+
+      if (apartment == null)
+      {
+        return NotFound("Not found!");
+      }
+
+      apartment.ApartmentTypeID = dto.ApartmentType;
+      apartment.ApartmentNo = dto.ApartmentNo;
+      apartment.BathroomCount = dto.BathroomCount;
+      apartment.BedroomCount = dto.BedroomCount;
+      apartment.ApartmentSize = dto.ApartmentSize;
+      apartment.RentPrice = dto.RentPrice;
+      apartment.ApartmentDetails = dto.ApartmentDetails;
+
+      var facilitiesToRemove = apartment.ApartmentFacilities
+                               .Where(ap => !dto.ApartmentFacilities.Contains(ap.FacilityTypeID)).ToList();
+
+      foreach (var facility in facilitiesToRemove)
+      {
+        apartment.ApartmentFacilities.Remove(facility);
+      }
+
+      foreach (var facilityID in dto.ApartmentFacilities)
+      {
+        if (!apartment.ApartmentFacilities.Any(ap => ap.FacilityTypeID == facilityID))
+        {
+          apartment.ApartmentFacilities.Add(new ApartmentFacilities
+          {
+            ApartmentID = apartment.ApartmentID,
+            FacilityTypeID = facilityID
+          });
+        }
+      }
+
+      await _context.SaveChangesAsync();
+
+      await transaction.CommitAsync();
+
+      return Ok("Apartment Updated!");
+    }
+    catch (Exception)
+    {
+      await transaction.RollbackAsync();
+      return StatusCode(500);
+    }
+
+  }
 }
