@@ -42,6 +42,9 @@ public class Apartments
   [Column("apartment_details")]
   public string ApartmentDetails { get; set; } = string.Empty;
 
+  [Column("apt_deleted")]
+  public int ApartmentDeleted { get; set; }
+
 
   public ICollection<ApartmentFacilities> ApartmentFacilities { get; set; } = new List<ApartmentFacilities>();
   public ICollection<Bookings> Bookings { get; set; } = new List<Bookings>();
