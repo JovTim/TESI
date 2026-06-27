@@ -20,17 +20,23 @@ public class SellerApartmentsController : ControllerBase
   public async Task<ActionResult<List<SellerApartmentDTO>>> GetSellerByID(int sellerID)
   {
     var results = await _context.Apartments
-        .Where(a => a.Users!.IsSeller == 1 && a.Users.UserID == sellerID && a.ApartmentDeleted != 1)
+        .Where(a => a.Users!.IsSeller == 1 && a.Users.UserID == sellerID && a.ApartmentDeleted != 1 && a.ApartmentArchive != 1)
         .Select(a => new SellerApartmentDTO
         {
           ApartmentID = a.ApartmentID,
           ApartmentType = a.RefApartmentTypes!.apartment_type,
+          ApartmentName = a.ApartmentName,
           ApartmentNo = a.ApartmentNo,
           BathroomCount = a.BathroomCount,
           BedroomCount = a.BedroomCount,
           ApartmentSize = a.ApartmentSize,
           RentPrice = a.RentPrice,
           ApartmentDetails = a.ApartmentDetails,
+          ApartmentCountry = a.ApartmentCountry,
+          ApartmentState = a.ApartmentState,
+          ApartmentCity = a.ApartmentCity,
+          ApartmentZip = a.ApartmentZip,
+          ApartmentAddressDetails = a.ApartmentAddressDetails,
           Facilities = a.ApartmentFacilities
                       .Select(af => af.RefFacilitiyTypes!.FacilityType).ToList()
         }).ToListAsync();
@@ -48,12 +54,18 @@ public class SellerApartmentsController : ControllerBase
       {
         ApartmentTypeID = apartment.ApartmentType,
         UserID = sellerID,
+        ApartmentName = apartment.ApartmentName,
         ApartmentNo = apartment.ApartmentNo,
         BathroomCount = apartment.BathroomCount,
         BedroomCount = apartment.BedroomCount,
         ApartmentSize = apartment.ApartmentSize,
         RentPrice = apartment.RentPrice,
         ApartmentDetails = apartment.ApartmentDetails,
+        ApartmentCountry = apartment.ApartmentCountry,
+        ApartmentState = apartment.ApartmentState,
+        ApartmentCity = apartment.ApartmentCity,
+        ApartmentZip = apartment.ApartmentZip,
+        ApartmentAddressDetails = apartment.ApartmentAddressDetails,
         ApartmentDeleted = 0
       };
 
@@ -97,12 +109,18 @@ public class SellerApartmentsController : ControllerBase
       }
 
       apartment.ApartmentTypeID = dto.ApartmentType;
+      apartment.ApartmentName = dto.ApartmentName;
       apartment.ApartmentNo = dto.ApartmentNo;
       apartment.BathroomCount = dto.BathroomCount;
       apartment.BedroomCount = dto.BedroomCount;
       apartment.ApartmentSize = dto.ApartmentSize;
       apartment.RentPrice = dto.RentPrice;
       apartment.ApartmentDetails = dto.ApartmentDetails;
+      apartment.ApartmentCountry = dto.ApartmentCountry;
+      apartment.ApartmentState = dto.ApartmentState;
+      apartment.ApartmentCity = dto.ApartmentCity;
+      apartment.ApartmentZip = dto.ApartmentZip;
+      apartment.ApartmentAddressDetails = dto.ApartmentAddressDetails;
 
       var facilitiesToRemove = apartment.ApartmentFacilities
                                .Where(ap => !dto.ApartmentFacilities.Contains(ap.FacilityTypeID)).ToList();
