@@ -22,6 +22,9 @@ public class Apartments
   [ForeignKey(nameof(UserID))]
   public Users? Users { get; set; }
 
+  [Column("apartment_name")]
+  public string ApartmentName { get; set; } = string.Empty;
+
   [Column("apartment_no")]
   public string ApartmentNo { get; set; } = string.Empty;
 
@@ -41,6 +44,24 @@ public class Apartments
 
   [Column("apartment_details")]
   public string ApartmentDetails { get; set; } = string.Empty;
+
+  [Column("apartment_country")]
+  public string ApartmentCountry { get; set; } = string.Empty;
+
+  [Column("apartment_state")]
+  public string ApartmentState { get; set; } = string.Empty;
+
+  [Column("apartment_city")]
+  public string ApartmentCity { get; set; } = string.Empty;
+
+  [Column("apartment_zip")]
+  public string ApartmentZip { get; set; } = string.Empty;
+
+  [Column("apartment_add_details")]
+  public string ApartmentAddressDetails { get; set; } = string.Empty;
+
+  [Column("apt_archive")]
+  public int ApartmentArchive { get; set; }
 
   [Column("apt_deleted")]
   public int ApartmentDeleted { get; set; }
