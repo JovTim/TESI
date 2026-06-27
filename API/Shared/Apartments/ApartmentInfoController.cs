@@ -25,12 +25,18 @@ public class ApartmentsController : ControllerBase
         {
           ApartmentID = a.ApartmentID,
           ApartmentType = a.RefApartmentTypes!.apartment_type,
+          ApartmentName = a.ApartmentName,
           ApartmentNo = a.ApartmentNo,
           BathroomCount = a.BathroomCount,
           BedroomCount = a.BedroomCount,
           ApartmentSize = a.ApartmentSize,
           RentPrice = a.RentPrice,
           ApartmentDetails = a.ApartmentDetails,
+          ApartmentCountry = a.ApartmentCountry,
+          ApartmentState = a.ApartmentState,
+          ApartmentCity = a.ApartmentCity,
+          ApartmentZip = a.ApartmentZip,
+          ApartmentAddressDetails = a.ApartmentAddressDetails,
           SellerName = string.Concat(a.Users!.FirstName, " ", a.Users!.LastName),
           Facilities = a.ApartmentFacilities
                       .Select(af => af.RefFacilitiyTypes!.FacilityType).ToList()
